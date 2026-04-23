@@ -1,0 +1,38 @@
+name: Bug report
+description: Report a defect in behavior
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: A clear description of the bug. Do NOT include real JWE strings or key material.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Start backend and frontend via scripts/dev.sh
+        2. Submit a loan application
+        3. Observe ...
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      placeholder: macOS 15, JDK 17, Node 20
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or error output
+      description: Redact any key material, JWE contents, or user data.
+      render: shell

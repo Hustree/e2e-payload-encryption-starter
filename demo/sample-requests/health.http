@@ -1,0 +1,6 @@
+### Backend health probe — unencrypted
+GET http://localhost:8080/api/encrypted/health
+Accept: application/json
+
+### Equivalent curl
+# curl -s http://localhost:8080/api/encrypted/health | jq .

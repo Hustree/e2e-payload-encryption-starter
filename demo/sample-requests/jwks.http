@@ -1,0 +1,7 @@
+### Fetch backend public key set
+### Frontend calls this at boot; response is cached by kid
+GET http://localhost:8080/.well-known/jwks.json
+Accept: application/json
+
+### Equivalent curl
+# curl -s http://localhost:8080/.well-known/jwks.json | jq .

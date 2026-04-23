@@ -1,0 +1,19 @@
+* text=auto eol=lf
+
+# Scripts
+*.sh text eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binaries
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.jar binary
+*.pdf binary
+
+# Maven wrapper jar
+.mvn/wrapper/maven-wrapper.jar binary

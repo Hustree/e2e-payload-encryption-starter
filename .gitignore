@@ -1,0 +1,78 @@
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- IDE ---
+.idea/
+.vscode/
+*.iml
+*.swp
+*~
+*.bak
+.cursor/
+
+# --- Java / Maven / Quarkus ---
+backend/target/
+backend/.quarkus/
+backend/dependency-reduced-pom.xml
+*.class
+hs_err_pid*.log
+replay_pid*.log
+
+# --- Node / React / CRA ---
+frontend/node_modules/
+frontend/build/
+frontend/coverage/
+frontend/playwright-report/
+frontend/test-results/
+frontend/blob-report/
+scripts/node_modules/
+
+# --- Secrets / env ---
+# Ignore all .env variants; allow only the .example templates
+.env
+.env.*
+!.env.example
+!*.env.example
+
+# --- Cryptographic material — CRITICAL for a public repo ---
+# Never commit real key material. This repo has none; these patterns are preventive.
+*.pem
+*.key
+*.crt
+*.cer
+*.der
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.truststore
+*.jwk
+*.jwks
+# Exception: the public JWKS endpoint response is fetched at runtime — never a file.
+# If you ever need test fixture keys, place them under backend/src/test/resources/
+# with an explicit, descriptive filename and exclude via .gitattributes if binary.
+id_rsa*
+id_ecdsa*
+id_ed25519*
+id_dsa*
+*.gpg
+*.asc
+secrets/
+.secrets/
+credentials/
+*private-key*
+*-private.*
+
+# --- Logs ---
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- Claude / Copilot / AI session files ---
+.claude/
+.copilot/
+.aider*

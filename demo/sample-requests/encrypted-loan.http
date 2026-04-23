@@ -1,0 +1,19 @@
+### Submit an encrypted loan application
+### Requires a real JWE produced against the backend's current kid.
+### Produce the `jwe` string and `X-Frontend-Public-Key` header via `node scripts/smoke-e2e.mjs`
+### (which prints the full request) or by copying from the browser DevTools Network panel.
+POST http://localhost:8080/api/encrypted/loan
+Content-Type: application/json
+X-Frontend-Public-Key: {"kty":"RSA","use":"enc","alg":"RSA-OAEP-256","kid":"frontend-<paste>","n":"<paste>","e":"AQAB"}
+
+{
+  "jwe": "<paste compact-JWE string here>",
+  "aad": {
+    "nonce": "<paste uuid>",
+    "ts": 1761312450123
+  }
+}
+
+### Why you can't hand-craft this
+### The JWE body must be encrypted to the backend's current public key (kid from /.well-known/jwks.json).
+### The kid rotates on every backend restart. Generate via the Node smoke script rather than copy-pasting stale values.

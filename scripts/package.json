@@ -1,0 +1,13 @@
+{
+  "name": "e2e-payload-encryption-scripts",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Standalone smoke scripts for the end-to-end encryption reference.",
+  "type": "module",
+  "scripts": {
+    "smoke": "node smoke-e2e.mjs"
+  },
+  "dependencies": {
+    "jose": "^5.9.6"
+  }
+}
