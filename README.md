@@ -17,27 +17,28 @@ The project is sized as a **coding-standards exemplar** — small enough that an
 
 ## How it works in 30 seconds
 
-```text
-browser                                              backend
-   │                                                    │
-   │── GET /.well-known/jwks.json ────────────────────▶ │
-   │◀──────────────────── backend public RSA key (JWK) ─│
-   │                                                    │
-   │  user submits form                                 │
-   │  encrypt JSON → JWE  (RSA-OAEP-256 + A256GCM)      │
-   │  attach { nonce, ts } as AAD                       │
-   │                                                    │
-   │── POST /api/encrypted/loan ──────────────────────▶ │  decrypt with backend
-   │      body:    { jwe, aad }                         │  private key; validate
-   │      header:  X-Frontend-Public-Key (JWK)          │  AAD timestamp ±60s
-   │                                                    │
-   │                                  process loan     │
-   │                                                    │
-   │                        encrypt response JSON →    │
-   │                        JWE to frontend public key │
-   │◀─────────────────────────── { encrypted, jwe } ───│
-   │  decrypt with frontend private key                 │
-   │  render result                                     │
+```mermaid
+sequenceDiagram
+    autonumber
+    participant B as Browser
+    participant S as Backend
+
+    Note over B: Boot — generate ephemeral<br/>RSA key pair (per tab)
+
+    B->>S: GET /.well-known/jwks.json
+    S-->>B: backend public JWK (kid)
+
+    Note over B: User submits form
+    B->>B: Encrypt JSON → JWE<br/>RSA-OAEP-256 + A256GCM<br/>AAD = { nonce, ts }
+
+    B->>S: POST /api/encrypted/loan<br/>body { jwe, aad }<br/>header X-Frontend-Public-Key
+    S->>S: Decrypt with backend private key
+    S->>S: Validate AAD timestamp (±60s)
+    S->>S: Process request
+    S->>S: Encrypt response → JWE<br/>to frontend public key
+    S-->>B: { encrypted: true, jwe }
+
+    B->>B: Decrypt with frontend private key<br/>Render result
 ```
 
 No plaintext ever crosses the wire in either direction.
